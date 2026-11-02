@@ -20,7 +20,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
-from .data import FixedPadDataset, NativeDataset, RandomSizeDataset, collate, load_images
+from .data import DATA_ROOT, FixedPadDataset, NativeDataset, RandomSizeDataset, collate, load_images
 from .models import MODELS
 
 RESULTS = Path(__file__).resolve().parents[2] / "results"
@@ -125,7 +125,9 @@ def summarize(name, runs, extra):
 
 def cmd_train(args):
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    images, labels, classes = load_images()
+    if args.data and args.split == "group":
+        raise SystemExit("--split group uses groups computed on the original dataset; don't combine with --data")
+    images, labels, classes = load_images(Path(args.data) if args.data else DATA_ROOT)
     runs = []
     for seed in args.seeds:
         r = run_one(args, images, labels, seed, device)
@@ -134,6 +136,8 @@ def cmd_train(args):
     name = f"{args.model}_{args.input}_tr{int(100 * args.train_frac)}"
     if args.split != "random":
         name += f"_{args.split}"
+    if args.data:
+        name += "_" + Path(args.data).name
     summarize(name, runs, {"args": vars(args) | {"func": None}, "classes": classes})
 
 
@@ -168,6 +172,7 @@ def main():
     t.add_argument("--model", choices=list(MODELS), default="mcnn")
     t.add_argument("--input", choices=["pad", "silhouette", "native", "native-constant",
                             "randsize", "randsize-constant", "randsize-pad", "randsize-pad-constant"], default="pad")
+    t.add_argument("--data", help="dataset root (default: original watertank-cropped)")
     t.add_argument("--split", choices=["random", "group"], default="random")
     t.add_argument("--epochs", type=int, default=30)
     t.add_argument("--bs", type=int, default=32)
