@@ -50,7 +50,7 @@ randsize), accuracy at the final epoch (no validation set).
 | VarCNN | randsize | 99.86 ± 0.10 | 96.57 ± 0.36 | 99.72 ± 0.40 |
 | VarCNN | randsize-constant | 19.03 (chance) | | |
 
-Near-duplicates (`results/dupes.json`): 1-NN on 32x32 thumbnails gets 99.93% on
+Near-duplicates (`results/dupes.json`): 1-NN on 32x32 thumbnails gets 100.00% on
 a random split (71% of test images have a training image with correlation > 0.9)
 vs 92.0% on the group split. File numbers do not follow recording order.
 
