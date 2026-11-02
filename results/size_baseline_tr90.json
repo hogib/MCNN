@@ -1,0 +1,31 @@
+{
+  "classes": [
+    "bottle",
+    "can",
+    "chain",
+    "drink-carton",
+    "hook",
+    "propeller",
+    "shampoo-bottle",
+    "standing-bottle",
+    "tire",
+    "valve"
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "acc": 0.9704641350210971,
+      "macro_f1": 0.9739107578931165
+    },
+    {
+      "seed": 1,
+      "acc": 0.9957805907172996,
+      "macro_f1": 0.9949264332825976
+    },
+    {
+      "seed": 2,
+      "acc": 0.9915611814345991,
+      "macro_f1": 0.9923009059188834
+    }
+  ]
+}

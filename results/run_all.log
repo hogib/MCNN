@@ -1,0 +1,156 @@
+per-class mean (h, w) and range:
+  bottle           n= 449  mean   87.8 x   83.3  h 57-98  w 72-103
+  can              n= 367  mean   75.1 x   70.1  h 55-96  w 47-105
+  chain            n= 226  mean   90.5 x   69.7  h 50-235  w 48-148
+  drink-carton     n= 349  mean   56.8 x   59.4  h 42-74  w 43-88
+  hook             n= 133  mean  109.2 x  101.9  h 66-173  w 89-115
+  propeller        n= 137  mean  119.0 x  123.1  h 80-135  w 96-142
+  shampoo-bottle   n=  99  mean   68.5 x  200.0  h 67-75  w 173-266
+  standing-bottle  n=  65  mean   46.4 x  172.8  h 42-50  w 161-181
+  tire             n= 331  mean   98.5 x   95.7  h 55-143  w 73-148
+  valve            n= 208  mean   98.7 x   87.5  h 76-121  w 56-102
+size_baseline_tr80: acc 98.17 ± 0.70  macro-F1 98.36 ± 0.64  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/size_baseline_tr80.json
+per-class mean (h, w) and range:
+  bottle           n= 449  mean   87.8 x   83.3  h 57-98  w 72-103
+  can              n= 367  mean   75.1 x   70.1  h 55-96  w 47-105
+  chain            n= 226  mean   90.5 x   69.7  h 50-235  w 48-148
+  drink-carton     n= 349  mean   56.8 x   59.4  h 42-74  w 43-88
+  hook             n= 133  mean  109.2 x  101.9  h 66-173  w 89-115
+  propeller        n= 137  mean  119.0 x  123.1  h 80-135  w 96-142
+  shampoo-bottle   n=  99  mean   68.5 x  200.0  h 67-75  w 173-266
+  standing-bottle  n=  65  mean   46.4 x  172.8  h 42-50  w 161-181
+  tire             n= 331  mean   98.5 x   95.7  h 55-143  w 73-148
+  valve            n= 208  mean   98.7 x   87.5  h 76-121  w 56-102
+size_baseline_tr90: acc 98.59 ± 1.11  macro-F1 98.70 ± 0.93  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/size_baseline_tr90.json
+  seed 0 ep   1 loss 1.0403
+  seed 0 ep   5 loss 0.0059
+  seed 0 ep  10 loss 0.0002
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.79  errors 1/473
+  seed 1 ep   1 loss 0.8325
+  seed 1 ep   5 loss 0.0216
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0001
+  seed 1 ep  30 loss 0.0001
+  seed 1: acc 100.00  errors 0/473
+  seed 2 ep   1 loss 1.5664
+  seed 2 ep   5 loss 0.0138
+  seed 2 ep  10 loss 0.0003
+  seed 2 ep  15 loss 0.0002
+  seed 2 ep  20 loss 0.0001
+  seed 2 ep  25 loss 0.0001
+  seed 2 ep  30 loss 0.0001
+  seed 2: acc 99.37  errors 3/473
+mcnn_pad_tr80: acc 99.72 ± 0.26  macro-F1 99.79 ± 0.21  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/mcnn_pad_tr80.json
+  seed 0 ep   1 loss 0.8002
+  seed 0 ep   5 loss 0.0062
+  seed 0 ep  10 loss 0.0002
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.58  errors 1/237
+  seed 1 ep   1 loss 0.7512
+  seed 1 ep   5 loss 0.0029
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0001
+  seed 1 ep  30 loss 0.0001
+  seed 1: acc 100.00  errors 0/237
+  seed 2 ep   1 loss 0.5541
+  seed 2 ep   5 loss 0.0786
+  seed 2 ep  10 loss 0.0002
+  seed 2 ep  15 loss 0.0001
+  seed 2 ep  20 loss 0.0001
+  seed 2 ep  25 loss 0.0001
+  seed 2 ep  30 loss 0.0001
+  seed 2: acc 100.00  errors 0/237
+mcnn_pad_tr90: acc 99.86 ± 0.20  macro-F1 99.91 ± 0.13  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/mcnn_pad_tr90.json
+  seed 0 ep   1 loss 1.3381
+  seed 0 ep   5 loss 0.1987
+  seed 0 ep  10 loss 0.0324
+  seed 0 ep  15 loss 0.0246
+  seed 0 ep  20 loss 0.0217
+  seed 0 ep  25 loss 0.0205
+  seed 0 ep  30 loss 0.0202
+  seed 0: acc 97.89  errors 10/473
+  seed 1 ep   1 loss 1.2363
+  seed 1 ep   5 loss 0.1508
+  seed 1 ep  10 loss 0.0371
+  seed 1 ep  15 loss 0.0253
+  seed 1 ep  20 loss 0.0259
+  seed 1 ep  25 loss 0.0236
+  seed 1 ep  30 loss 0.0225
+  seed 1: acc 98.73  errors 6/473
+  seed 2 ep   1 loss 1.3405
+  seed 2 ep   5 loss 0.1102
+  seed 2 ep  10 loss 0.0355
+  seed 2 ep  15 loss 0.0257
+  seed 2 ep  20 loss 0.0231
+  seed 2 ep  25 loss 0.0208
+  seed 2 ep  30 loss 0.0200
+  seed 2: acc 98.31  errors 8/473
+mcnn_silhouette_tr80: acc 98.31 ± 0.35  macro-F1 98.46 ± 0.32  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/mcnn_silhouette_tr80.json
+  seed 0 ep   1 loss 1.0048
+  seed 0 ep   5 loss 0.0327
+  seed 0 ep  10 loss 0.0382
+  seed 0 ep  15 loss 0.0041
+  seed 0 ep  20 loss 0.0032
+  seed 0 ep  25 loss 0.0026
+  seed 0 ep  30 loss 0.0028
+  seed 0: acc 99.79  errors 1/473
+  seed 1 ep   1 loss 0.9772
+  seed 1 ep   5 loss 0.0340
+  seed 1 ep  10 loss 0.0129
+  seed 1 ep  15 loss 0.0036
+  seed 1 ep  20 loss 0.0098
+  seed 1 ep  25 loss 0.0031
+  seed 1 ep  30 loss 0.0030
+  seed 1: acc 100.00  errors 0/473
+  seed 2 ep   1 loss 0.9632
+  seed 2 ep   5 loss 0.0317
+  seed 2 ep  10 loss 0.0123
+  seed 2 ep  15 loss 0.0063
+  seed 2 ep  20 loss 0.0070
+  seed 2 ep  25 loss 0.0035
+  seed 2 ep  30 loss 0.0031
+  seed 2: acc 99.79  errors 1/473
+varcnn_native_tr80: acc 99.86 ± 0.10  macro-F1 99.90 ± 0.07  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/varcnn_native_tr80.json
+  seed 0 ep   1 loss 1.2402
+  seed 0 ep   5 loss 0.3531
+  seed 0 ep  10 loss 0.1794
+  seed 0 ep  15 loss 0.1118
+  seed 0 ep  20 loss 0.0920
+  seed 0 ep  25 loss 0.0640
+  seed 0 ep  30 loss 0.0632
+  seed 0: acc 95.35  errors 22/473
+  seed 1 ep   1 loss 1.1707
+  seed 1 ep   5 loss 0.2831
+  seed 1 ep  10 loss 0.1679
+  seed 1 ep  15 loss 0.0891
+  seed 1 ep  20 loss 0.0716
+  seed 1 ep  25 loss 0.0579
+  seed 1 ep  30 loss 0.0548
+  seed 1: acc 97.89  errors 10/473
+  seed 2 ep   1 loss 1.2866
+  seed 2 ep   5 loss 0.3047
+  seed 2 ep  10 loss 0.1609
+  seed 2 ep  15 loss 0.1019
+  seed 2 ep  20 loss 0.0827
+  seed 2 ep  25 loss 0.0662
+  seed 2 ep  30 loss 0.0526
+  seed 2: acc 97.89  errors 10/473
+varcnn_native-constant_tr80: acc 97.04 ± 1.20  macro-F1 97.02 ± 1.23  (3 seeds)
+wrote /home/hogib/Projects/sonar_cnn/results/varcnn_native-constant_tr80.json
