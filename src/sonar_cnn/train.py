@@ -16,7 +16,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_recall_fscore_support
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
@@ -101,7 +101,11 @@ def run_one(args, images, labels, seed, device):
         if (ep + 1) % 5 == 0 or ep == 0:
             print(f"  seed {seed} ep {ep + 1:3d} loss {tot / len(train_ds):.4f}", flush=True)
     yt, yp = evaluate(model, test_dl, device)
+    n_cls = len(np.unique(labels))
+    prec, rec, f1c, sup = precision_recall_fscore_support(yt, yp, labels=range(n_cls), zero_division=0)
     return {
+        "per_class": {"precision": prec.tolist(), "recall": rec.tolist(), "f1": f1c.tolist(), "support": sup.tolist()},
+        "confusion": confusion_matrix(yt, yp, labels=range(n_cls)).tolist(),
         "seed": seed,
         "acc": accuracy_score(yt, yp),
         "macro_f1": f1_score(yt, yp, average="macro"),
