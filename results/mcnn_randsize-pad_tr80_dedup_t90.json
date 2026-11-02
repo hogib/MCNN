@@ -1,0 +1,59 @@
+{
+  "args": {
+    "model": "mcnn",
+    "input": "randsize-pad",
+    "data": "data/dedup_t90",
+    "split": "random",
+    "epochs": 50,
+    "bs": 32,
+    "lr": 0.001,
+    "train_frac": 0.8,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "func": null
+  },
+  "classes": [
+    "bottle",
+    "can",
+    "chain",
+    "drink-carton",
+    "hook",
+    "propeller",
+    "shampoo-bottle",
+    "standing-bottle",
+    "tire",
+    "valve"
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "acc": 0.9914893617021276,
+      "macro_f1": 0.9870588235294118,
+      "errors": 2,
+      "n_test": 235,
+      "params": 2797706,
+      "train_s": 88.4
+    },
+    {
+      "seed": 1,
+      "acc": 0.9744680851063829,
+      "macro_f1": 0.9819786294372088,
+      "errors": 6,
+      "n_test": 235,
+      "params": 2797706,
+      "train_s": 88.4
+    },
+    {
+      "seed": 2,
+      "acc": 0.9872340425531915,
+      "macro_f1": 0.9885576710988445,
+      "errors": 3,
+      "n_test": 235,
+      "params": 2797706,
+      "train_s": 88.3
+    }
+  ]
+}
