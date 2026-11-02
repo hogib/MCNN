@@ -1,0 +1,58 @@
+{
+  "args": {
+    "model": "varcnn",
+    "input": "native",
+    "split": "group",
+    "epochs": 30,
+    "bs": 32,
+    "lr": 0.001,
+    "train_frac": 0.8,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "func": null
+  },
+  "classes": [
+    "bottle",
+    "can",
+    "chain",
+    "drink-carton",
+    "hook",
+    "propeller",
+    "shampoo-bottle",
+    "standing-bottle",
+    "tire",
+    "valve"
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "acc": 0.9742574257425742,
+      "macro_f1": 0.9756925249303829,
+      "errors": 13,
+      "n_test": 505,
+      "params": 184650,
+      "train_s": 275.6
+    },
+    {
+      "seed": 1,
+      "acc": 0.9433198380566802,
+      "macro_f1": 0.9588940023010109,
+      "errors": 28,
+      "n_test": 494,
+      "params": 184650,
+      "train_s": 145.8
+    },
+    {
+      "seed": 2,
+      "acc": 0.9548254620123203,
+      "macro_f1": 0.9436231385431542,
+      "errors": 22,
+      "n_test": 487,
+      "params": 184650,
+      "train_s": 105.3
+    }
+  ]
+}

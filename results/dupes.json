@@ -1,0 +1,30 @@
+{
+  "consecutive_median": 0.45808953046798706,
+  "random_same_class_median": 0.45179492235183716,
+  "splits": [
+    {
+      "split": "random",
+      "nn1_acc": 1.0,
+      "nn1_acc_std": 0.0,
+      "median_best_sim": 0.9272846579551697,
+      "frac_best_sim_gt_0.95": 0.30303030303030304,
+      "frac_best_sim_gt_0.90": 0.711768851303735
+    },
+    {
+      "split": "block",
+      "nn1_acc": 1.0,
+      "nn1_acc_std": 0.0,
+      "median_best_sim": 0.9270792007446289,
+      "frac_best_sim_gt_0.95": 0.3093727977448908,
+      "frac_best_sim_gt_0.90": 0.7181113460183227
+    },
+    {
+      "split": "group",
+      "nn1_acc": 0.9200544414939961,
+      "nn1_acc_std": 0.009361983798832125,
+      "median_best_sim": 0.7598029375076294,
+      "frac_best_sim_gt_0.95": 0.0,
+      "frac_best_sim_gt_0.90": 0.0
+    }
+  ]
+}
