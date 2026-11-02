@@ -26,7 +26,20 @@ from .models import MODELS
 RESULTS = Path(__file__).resolve().parents[2] / "results"
 
 
-def split(labels, train_frac, seed):
+_GROUPS = None
+
+
+def split(labels, train_frac, seed, kind="random"):
+    if kind == "group":
+        # Pseudo-sequence split: near-duplicate chains never straddle train/test.
+        global _GROUPS
+        from .dupes import group_split, load_thumbs, pseudo_sequences
+
+        if _GROUPS is None:
+            X, lab, _, _ = load_thumbs()
+            assert (lab == labels).all()
+            _GROUPS = pseudo_sequences(X, lab)
+        return group_split(labels, _GROUPS, 1 - train_frac, seed)
     idx = np.arange(len(labels))
     return train_test_split(idx, train_size=train_frac, stratify=labels, random_state=seed)
 
@@ -62,7 +75,7 @@ def evaluate(model, loader, device):
 
 def run_one(args, images, labels, seed, device):
     torch.manual_seed(seed)
-    tr, te = split(labels, args.train_frac, seed)
+    tr, te = split(labels, args.train_frac, seed, args.split)
     pick = lambda ix: ([images[i] for i in ix], labels[ix])
     train_ds = make_dataset(args.input, *pick(tr), train=True, seed=seed)
     test_ds = make_dataset(args.input, *pick(te), train=False, seed=seed)
@@ -119,6 +132,8 @@ def cmd_train(args):
         print(f"  seed {seed}: acc {100 * r['acc']:.2f}  errors {r['errors']}/{r['n_test']}")
         runs.append(r)
     name = f"{args.model}_{args.input}_tr{int(100 * args.train_frac)}"
+    if args.split != "random":
+        name += f"_{args.split}"
     summarize(name, runs, {"args": vars(args) | {"func": None}, "classes": classes})
 
 
@@ -153,6 +168,7 @@ def main():
     t.add_argument("--model", choices=list(MODELS), default="mcnn")
     t.add_argument("--input", choices=["pad", "silhouette", "native", "native-constant",
                             "randsize", "randsize-constant", "randsize-pad", "randsize-pad-constant"], default="pad")
+    t.add_argument("--split", choices=["random", "group"], default="random")
     t.add_argument("--epochs", type=int, default=30)
     t.add_argument("--bs", type=int, default=32)
     t.add_argument("--lr", type=float, default=1e-3)
