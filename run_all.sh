@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Runs every experiment in sequence. Results go to results/*.json.
 set -euo pipefail
+export PYTHONUNBUFFERED=1
 uv run sonar-cnn size-baseline
 uv run sonar-cnn size-baseline --train-frac 0.9
 uv run sonar-cnn train --model mcnn --input pad
