@@ -1,0 +1,58 @@
+{
+  "args": {
+    "model": "mcnn",
+    "input": "randsize-pad-constant",
+    "split": "random",
+    "epochs": 50,
+    "bs": 32,
+    "lr": 0.001,
+    "train_frac": 0.8,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "func": null
+  },
+  "classes": [
+    "bottle",
+    "can",
+    "chain",
+    "drink-carton",
+    "hook",
+    "propeller",
+    "shampoo-bottle",
+    "standing-bottle",
+    "tire",
+    "valve"
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "acc": 0.19027484143763213,
+      "macro_f1": 0.03197158081705151,
+      "errors": 383,
+      "n_test": 473,
+      "params": 2797706,
+      "train_s": 128.9
+    },
+    {
+      "seed": 1,
+      "acc": 0.19027484143763213,
+      "macro_f1": 0.03197158081705151,
+      "errors": 383,
+      "n_test": 473,
+      "params": 2797706,
+      "train_s": 127.8
+    },
+    {
+      "seed": 2,
+      "acc": 0.19027484143763213,
+      "macro_f1": 0.03197158081705151,
+      "errors": 383,
+      "n_test": 473,
+      "params": 2797706,
+      "train_s": 127.9
+    }
+  ]
+}
