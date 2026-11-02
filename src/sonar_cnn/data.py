@@ -67,6 +67,44 @@ class NativeDataset(Dataset):
         return torch.from_numpy(x)[None], img.shape, int(self.labels[i])
 
 
+class RandomSizeDataset(Dataset):
+    """Resize every image to a random (h, w) drawn uniformly from [lo, hi] for
+    each axis, independent of its class, so crop size and aspect ratio carry
+    no class information.
+
+    train=True draws a new size every time an image is loaded (augmentation).
+    train=False gives each image one fixed random size (seeded by its index), so
+    the test set doesn't change between runs.
+    pad_to: center zero-pad to pad_to x pad_to afterwards (for MCNN).
+    constant: replace content with 1s, a probe that should now be at chance level.
+    """
+
+    def __init__(self, images, labels, train, lo=48, hi=160, pad_to=None, constant=False, seed=0):
+        self.images, self.labels = images, labels
+        self.train, self.lo, self.hi = train, lo, hi
+        self.pad_to, self.constant = pad_to, constant
+        self.rng = np.random.default_rng(seed)
+        self.seed = seed
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, i):
+        rng = self.rng if self.train else np.random.default_rng((self.seed, i))
+        h, w = (int(v) for v in rng.integers(self.lo, self.hi + 1, size=2))
+        if self.constant:
+            x = np.ones((h, w), np.float32)
+        else:
+            img = Image.fromarray(self.images[i]).resize((w, h), Image.BILINEAR)
+            x = np.asarray(img, np.float32) / 255.0
+        if self.pad_to:
+            out = np.zeros((self.pad_to, self.pad_to), np.float32)
+            top, left = (self.pad_to - h) // 2, (self.pad_to - w) // 2
+            out[top : top + h, left : left + w] = x
+            x = out
+        return torch.from_numpy(x)[None], x.shape, int(self.labels[i])
+
+
 def collate(batch):
     """Stack a batch, padding to the largest image at the bottom/right if sizes differ.
 

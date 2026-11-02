@@ -20,7 +20,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
-from .data import FixedPadDataset, NativeDataset, collate, load_images
+from .data import FixedPadDataset, NativeDataset, RandomSizeDataset, collate, load_images
 from .models import MODELS
 
 RESULTS = Path(__file__).resolve().parents[2] / "results"
@@ -31,7 +31,14 @@ def split(labels, train_frac, seed):
     return train_test_split(idx, train_size=train_frac, stratify=labels, random_state=seed)
 
 
-def make_dataset(kind, images, labels):
+def make_dataset(kind, images, labels, train=False, seed=0):
+    if kind.startswith("randsize"):
+        return RandomSizeDataset(
+            images, labels, train,
+            pad_to=305 if "pad" in kind else None,
+            constant="constant" in kind,
+            seed=seed + (0 if train else 10_000),
+        )
     if kind == "pad":
         return FixedPadDataset(images, labels)
     if kind == "silhouette":
@@ -57,8 +64,8 @@ def run_one(args, images, labels, seed, device):
     torch.manual_seed(seed)
     tr, te = split(labels, args.train_frac, seed)
     pick = lambda ix: ([images[i] for i in ix], labels[ix])
-    train_ds = make_dataset(args.input, *pick(tr))
-    test_ds = make_dataset(args.input, *pick(te))
+    train_ds = make_dataset(args.input, *pick(tr), train=True, seed=seed)
+    test_ds = make_dataset(args.input, *pick(te), train=False, seed=seed)
     g = torch.Generator().manual_seed(seed)
     train_dl = DataLoader(train_ds, args.bs, shuffle=True, collate_fn=collate, generator=g)
     test_dl = DataLoader(test_ds, 64, collate_fn=collate)
@@ -144,7 +151,8 @@ def main():
 
     t = sub.add_parser("train")
     t.add_argument("--model", choices=list(MODELS), default="mcnn")
-    t.add_argument("--input", choices=["pad", "silhouette", "native", "native-constant"], default="pad")
+    t.add_argument("--input", choices=["pad", "silhouette", "native", "native-constant",
+                            "randsize", "randsize-constant", "randsize-pad", "randsize-pad-constant"], default="pad")
     t.add_argument("--epochs", type=int, default=30)
     t.add_argument("--bs", type=int, default=32)
     t.add_argument("--lr", type=float, default=1e-3)
