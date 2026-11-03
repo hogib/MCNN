@@ -24,6 +24,7 @@ from .data import DATA_ROOT, FixedPadDataset, NativeDataset, RandomSizeDataset, 
 from .models import MODELS
 
 RESULTS = Path(__file__).resolve().parents[2] / "results"
+WEIGHTS = Path(__file__).resolve().parents[2] / "weights"  # trained models, one file per seed (not tracked)
 
 
 _GROUPS = None
@@ -113,6 +114,7 @@ def run_one(args, images, labels, seed, device):
         "n_test": len(yt),
         "params": sum(p.numel() for p in model.parameters()),
         "train_s": round(time.time() - t0, 1),
+        "_state": {k: v.detach().cpu() for k, v in model.state_dict().items()},
     }
 
 
@@ -122,9 +124,16 @@ def summarize(name, runs, extra):
     print(f"{name}: acc {100 * acc.mean():.2f} ± {100 * acc.std():.2f}  "
           f"macro-F1 {100 * f1.mean():.2f} ± {100 * f1.std():.2f}  ({len(runs)} seeds)")
     RESULTS.mkdir(exist_ok=True)
+    WEIGHTS.mkdir(exist_ok=True)
+    n_saved = 0
+    for r in runs:
+        state = r.pop("_state", None)
+        if state is not None:
+            torch.save({"model": state, "seed": r["seed"], "name": name, **extra}, WEIGHTS / f"{name}_seed{r['seed']}.pt")
+            n_saved += 1
     out = RESULTS / f"{name}.json"
     out.write_text(json.dumps({**extra, "runs": runs}, indent=2))
-    print(f"wrote {out}")
+    print(f"wrote {out}" + (f" and {n_saved} weight files to {WEIGHTS}" if n_saved else ""))
 
 
 def cmd_train(args):
