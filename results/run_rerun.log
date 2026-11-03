@@ -1,0 +1,542 @@
+per-class mean (h, w) and range:
+  bottle           n= 449  mean   87.8 x   83.3  h 57-98  w 72-103
+  can              n= 367  mean   75.1 x   70.1  h 55-96  w 47-105
+  chain            n= 226  mean   90.5 x   69.7  h 50-235  w 48-148
+  drink-carton     n= 349  mean   56.8 x   59.4  h 42-74  w 43-88
+  hook             n= 133  mean  109.2 x  101.9  h 66-173  w 89-115
+  propeller        n= 137  mean  119.0 x  123.1  h 80-135  w 96-142
+  shampoo-bottle   n=  99  mean   68.5 x  200.0  h 67-75  w 173-266
+  standing-bottle  n=  65  mean   46.4 x  172.8  h 42-50  w 161-181
+  tire             n= 331  mean   98.5 x   95.7  h 55-143  w 73-148
+  valve            n= 208  mean   98.7 x   87.5  h 76-121  w 56-102
+size_baseline_tr80: acc 98.17 ± 0.70  macro-F1 98.36 ± 0.64  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/size_baseline_tr80.json
+per-class mean (h, w) and range:
+  bottle           n= 449  mean   87.8 x   83.3  h 57-98  w 72-103
+  can              n= 367  mean   75.1 x   70.1  h 55-96  w 47-105
+  chain            n= 226  mean   90.5 x   69.7  h 50-235  w 48-148
+  drink-carton     n= 349  mean   56.8 x   59.4  h 42-74  w 43-88
+  hook             n= 133  mean  109.2 x  101.9  h 66-173  w 89-115
+  propeller        n= 137  mean  119.0 x  123.1  h 80-135  w 96-142
+  shampoo-bottle   n=  99  mean   68.5 x  200.0  h 67-75  w 173-266
+  standing-bottle  n=  65  mean   46.4 x  172.8  h 42-50  w 161-181
+  tire             n= 331  mean   98.5 x   95.7  h 55-143  w 73-148
+  valve            n= 208  mean   98.7 x   87.5  h 76-121  w 56-102
+size_baseline_tr90: acc 98.59 ± 1.11  macro-F1 98.70 ± 0.93  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/size_baseline_tr90.json
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 1.0211
+  seed 0 ep   5 loss 0.0038
+  seed 0 ep  10 loss 0.0002
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.79  errors 1/473
+  seed 1 ep   1 loss 0.8389
+  seed 1 ep   5 loss 0.0321
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0001
+  seed 1 ep  30 loss 0.0001
+  seed 1: acc 100.00  errors 0/473
+  seed 2 ep   1 loss 1.5044
+  seed 2 ep   5 loss 0.0123
+  seed 2 ep  10 loss 0.0003
+  seed 2 ep  15 loss 0.0002
+  seed 2 ep  20 loss 0.0001
+  seed 2 ep  25 loss 0.0001
+  seed 2 ep  30 loss 0.0001
+  seed 2: acc 99.58  errors 2/473
+mcnn_pad_tr80: acc 99.79 ± 0.17  macro-F1 99.85 ± 0.13  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_pad_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 0.7841
+  seed 0 ep   5 loss 0.0015
+  seed 0 ep  10 loss 0.0002
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.58  errors 1/237
+  seed 1 ep   1 loss 0.7516
+  seed 1 ep   5 loss 0.0014
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 0.7872
+  seed 0 ep   5 loss 0.0030
+  seed 0 ep  10 loss 0.0002
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.58  errors 1/237
+  seed 1 ep   1 loss 0.7175
+  seed 1 ep   5 loss 0.0034
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0001
+  seed 1 ep  30 loss 0.0000
+  seed 1: acc 100.00  errors 0/237
+  seed 2 ep   1 loss 0.5536
+  seed 2 ep   5 loss 0.0041
+  seed 2 ep  10 loss 0.0001
+  seed 2 ep  15 loss 0.0001
+  seed 2 ep  20 loss 0.0000
+  seed 2 ep  25 loss 0.0000
+  seed 2 ep  30 loss 0.0000
+  seed 2: acc 100.00  errors 0/237
+mcnn_pad_tr90: acc 99.86 ± 0.20  macro-F1 99.91 ± 0.13  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_pad_tr90.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 1.3069
+  seed 0 ep   5 loss 0.1659
+  seed 0 ep  10 loss 0.0344
+  seed 0 ep  15 loss 0.0239
+  seed 0 ep  20 loss 0.0219
+  seed 0 ep  25 loss 0.0206
+  seed 0 ep  30 loss 0.0202
+  seed 0: acc 97.46  errors 12/473
+  seed 1 ep   1 loss 1.2642
+  seed 1 ep   5 loss 0.1316
+  seed 1 ep  10 loss 0.0744
+  seed 1 ep  15 loss 0.0249
+  seed 1 ep  20 loss 0.0253
+  seed 1 ep  25 loss 0.0233
+  seed 1 ep  30 loss 0.0224
+  seed 1: acc 98.73  errors 6/473
+  seed 2 ep   1 loss 1.3728
+  seed 2 ep   5 loss 0.1303
+  seed 2 ep  10 loss 0.0404
+  seed 2 ep  15 loss 0.0252
+  seed 2 ep  20 loss 0.0228
+  seed 2 ep  25 loss 0.0209
+  seed 2 ep  30 loss 0.0199
+  seed 2: acc 98.52  errors 7/473
+mcnn_silhouette_tr80: acc 98.24 ± 0.55  macro-F1 98.40 ± 0.47  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_silhouette_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 1.0062
+  seed 0 ep   5 loss 0.0262
+  seed 0 ep  10 loss 0.0173
+  seed 0 ep  15 loss 0.0041
+  seed 0 ep  20 loss 0.0032
+  seed 0 ep  25 loss 0.0023
+  seed 0 ep  30 loss 0.0026
+  seed 0: acc 100.00  errors 0/473
+  seed 1 ep   1 loss 0.9704
+  seed 1 ep   5 loss 0.0323
+  seed 1 ep  10 loss 0.0118
+  seed 1 ep  15 loss 0.0029
+  seed 1 ep  20 loss 0.0038
+  seed 1 ep  25 loss 0.0028
+  seed 1 ep  30 loss 0.0025
+  seed 1: acc 99.79  errors 1/473
+  seed 2 ep   1 loss 0.9663
+  seed 2 ep   5 loss 0.0278
+  seed 2 ep  10 loss 0.0053
+  seed 2 ep  15 loss 0.0078
+  seed 2 ep  20 loss 0.0070
+  seed 2 ep  25 loss 0.0039
+  seed 2 ep  30 loss 0.0034
+  seed 2: acc 99.79  errors 1/473
+varcnn_native_tr80: acc 99.86 ± 0.10  macro-F1 99.86 ± 0.11  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_native_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 1.2529
+  seed 0 ep   5 loss 0.3652
+  seed 0 ep  10 loss 0.1805
+  seed 0 ep  15 loss 0.1068
+  seed 0 ep  20 loss 0.0897
+  seed 0 ep  25 loss 0.0649
+  seed 0 ep  30 loss 0.0639
+  seed 0: acc 95.98  errors 19/473
+  seed 1 ep   1 loss 1.1942
+  seed 1 ep   5 loss 0.2936
+  seed 1 ep  10 loss 0.2012
+  seed 1 ep  15 loss 0.0924
+  seed 1 ep  20 loss 0.0776
+  seed 1 ep  25 loss 0.0591
+  seed 1 ep  30 loss 0.0556
+  seed 1: acc 98.10  errors 9/473
+  seed 2 ep   1 loss 1.2903
+  seed 2 ep   5 loss 0.3148
+  seed 2 ep  10 loss 0.1660
+  seed 2 ep  15 loss 0.1018
+  seed 2 ep  20 loss 0.0897
+  seed 2 ep  25 loss 0.0661
+  seed 2 ep  30 loss 0.0533
+  seed 2: acc 97.89  errors 10/473
+varcnn_native-constant_tr80: acc 97.32 ± 0.95  macro-F1 97.36 ± 0.98  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_native-constant_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 2.3275
+  seed 0 ep   5 loss 2.2060
+  seed 0 ep  10 loss 2.1862
+  seed 0 ep  15 loss 2.1846
+  seed 0 ep  20 loss 2.1775
+  seed 0 ep  25 loss 2.1676
+  seed 0 ep  30 loss 2.1703
+  seed 0 ep  35 loss 2.1675
+  seed 0 ep  40 loss 2.1635
+  seed 0 ep  45 loss 2.1643
+  seed 0 ep  50 loss 2.1670
+  seed 0: acc 19.03  errors 383/473
+  seed 1 ep   1 loss 2.3241
+  seed 1 ep   5 loss 2.2065
+  seed 1 ep  10 loss 2.1799
+  seed 1 ep  15 loss 2.1737
+  seed 1 ep  20 loss 2.1725
+  seed 1 ep  25 loss 2.1702
+  seed 1 ep  30 loss 2.1676
+  seed 1 ep  35 loss 2.1667
+  seed 1 ep  40 loss 2.1668
+  seed 1 ep  45 loss 2.1640
+  seed 1 ep  50 loss 2.1623
+  seed 1: acc 19.03  errors 383/473
+  seed 2 ep   1 loss 2.3306
+  seed 2 ep   5 loss 2.1906
+  seed 2 ep  10 loss 2.1797
+  seed 2 ep  15 loss 2.1715
+  seed 2 ep  20 loss 2.1725
+  seed 2 ep  25 loss 2.1764
+  seed 2 ep  30 loss 2.1701
+  seed 2 ep  35 loss 2.1687
+  seed 2 ep  40 loss 2.1649
+  seed 2 ep  45 loss 2.1632
+  seed 2 ep  50 loss 2.1604
+  seed 2: acc 19.03  errors 383/473
+varcnn_randsize-constant_tr80: acc 19.03 ± 0.00  macro-F1 3.20 ± 0.00  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_randsize-constant_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 2.2843
+  seed 0 ep   5 loss 2.1717
+  seed 0 ep  10 loss 2.1693
+  seed 0 ep  15 loss 2.1652
+  seed 0 ep  20 loss 2.1614
+  seed 0 ep  25 loss 2.1618
+  seed 0 ep  30 loss 2.1622
+  seed 0 ep  35 loss 2.1607
+  seed 0 ep  40 loss 2.1601
+  seed 0 ep  45 loss 2.1594
+  seed 0 ep  50 loss 2.1592
+  seed 0: acc 19.03  errors 383/473
+  seed 1 ep   1 loss 2.2694
+  seed 1 ep   5 loss 2.1701
+  seed 1 ep  10 loss 2.1719
+  seed 1 ep  15 loss 2.1662
+  seed 1 ep  20 loss 2.1623
+  seed 1 ep  25 loss 2.1612
+  seed 1 ep  30 loss 2.1609
+  seed 1 ep  35 loss 2.1629
+  seed 1 ep  40 loss 2.1603
+  seed 1 ep  45 loss 2.1595
+  seed 1 ep  50 loss 2.1592
+  seed 1: acc 19.03  errors 383/473
+  seed 2 ep   1 loss 2.2402
+  seed 2 ep   5 loss 2.1756
+  seed 2 ep  10 loss 2.1697
+  seed 2 ep  15 loss 2.1788
+  seed 2 ep  20 loss 2.1636
+  seed 2 ep  25 loss 2.1621
+  seed 2 ep  30 loss 2.1610
+  seed 2 ep  35 loss 2.1604
+  seed 2 ep  40 loss 2.1598
+  seed 2 ep  45 loss 2.1593
+  seed 2 ep  50 loss 2.1592
+  seed 2: acc 19.03  errors 383/473
+mcnn_randsize-pad-constant_tr80: acc 19.03 ± 0.00  macro-F1 3.20 ± 0.00  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_randsize-pad-constant_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 1.3783
+  seed 0 ep   5 loss 0.2557
+  seed 0 ep  10 loss 0.2266
+  seed 0 ep  15 loss 0.0599
+  seed 0 ep  20 loss 0.0406
+  seed 0 ep  25 loss 0.0216
+  seed 0 ep  30 loss 0.0390
+  seed 0 ep  35 loss 0.0159
+  seed 0 ep  40 loss 0.0113
+  seed 0 ep  45 loss 0.0080
+  seed 0 ep  50 loss 0.0110
+  seed 0: acc 99.79  errors 1/473
+  seed 1 ep   1 loss 1.3271
+  seed 1 ep   5 loss 0.2283
+  seed 1 ep  10 loss 0.0922
+  seed 1 ep  15 loss 0.0974
+  seed 1 ep  20 loss 0.0504
+  seed 1 ep  25 loss 0.0298
+  seed 1 ep  30 loss 0.0149
+  seed 1 ep  35 loss 0.0188
+  seed 1 ep  40 loss 0.0219
+  seed 1 ep  45 loss 0.0107
+  seed 1 ep  50 loss 0.0104
+  seed 1: acc 100.00  errors 0/473
+  seed 2 ep   1 loss 1.3275
+  seed 2 ep   5 loss 0.2280
+  seed 2 ep  10 loss 0.0804
+  seed 2 ep  15 loss 0.1094
+  seed 2 ep  20 loss 0.0417
+  seed 2 ep  25 loss 0.0224
+  seed 2 ep  30 loss 0.0169
+  seed 2 ep  35 loss 0.0159
+  seed 2 ep  40 loss 0.0139
+  seed 2 ep  45 loss 0.0083
+  seed 2 ep  50 loss 0.0091
+  seed 2: acc 100.00  errors 0/473
+varcnn_randsize_tr80: acc 99.93 ± 0.10  macro-F1 99.95 ± 0.07  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_randsize_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 1.8682
+  seed 0 ep   5 loss 0.2025
+  seed 0 ep  10 loss 0.0709
+  seed 0 ep  15 loss 0.0274
+  seed 0 ep  20 loss 0.0118
+  seed 0 ep  25 loss 0.0086
+  seed 0 ep  30 loss 0.0046
+  seed 0 ep  35 loss 0.0019
+  seed 0 ep  40 loss 0.0025
+  seed 0 ep  45 loss 0.0020
+  seed 0 ep  50 loss 0.0015
+  seed 0: acc 100.00  errors 0/473
+  seed 1 ep   1 loss 1.6930
+  seed 1 ep   5 loss 0.2056
+  seed 1 ep  10 loss 0.0604
+  seed 1 ep  15 loss 0.0529
+  seed 1 ep  20 loss 0.0140
+  seed 1 ep  25 loss 0.0528
+  seed 1 ep  30 loss 0.0030
+  seed 1 ep  35 loss 0.0031
+  seed 1 ep  40 loss 0.0020
+  seed 1 ep  45 loss 0.0012
+  seed 1 ep  50 loss 0.0014
+  seed 1: acc 99.58  errors 2/473
+  seed 2 ep   1 loss 2.2367
+  seed 2 ep   5 loss 0.5664
+  seed 2 ep  10 loss 0.2139
+  seed 2 ep  15 loss 0.1496
+  seed 2 ep  20 loss 0.1150
+  seed 2 ep  25 loss 0.0748
+  seed 2 ep  30 loss 0.0638
+  seed 2 ep  35 loss 0.0249
+  seed 2 ep  40 loss 0.0194
+  seed 2 ep  45 loss 0.0123
+  seed 2 ep  50 loss 0.0110
+  seed 2: acc 98.73  errors 6/473
+mcnn_randsize-pad_tr80: acc 99.44 ± 0.53  macro-F1 99.30 ± 0.61  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_randsize-pad_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 1.1902
+  seed 0 ep   5 loss 0.0329
+  seed 0 ep  10 loss 0.0004
+  seed 0 ep  15 loss 0.0002
+  seed 0 ep  20 loss 0.0001
+  seed 0 ep  25 loss 0.0001
+  seed 0 ep  30 loss 0.0001
+  seed 0: acc 99.41  errors 3/505
+  seed 1 ep   1 loss 1.0539
+  seed 1 ep   5 loss 0.0056
+  seed 1 ep  10 loss 0.0002
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0001
+  seed 1 ep  30 loss 0.0001
+  seed 1: acc 95.14  errors 24/494
+  seed 2 ep   1 loss 0.9338
+  seed 2 ep   5 loss 0.0099
+  seed 2 ep  10 loss 0.0002
+  seed 2 ep  15 loss 0.0001
+  seed 2 ep  20 loss 0.0001
+  seed 2 ep  25 loss 0.0001
+  seed 2 ep  30 loss 0.0001
+  seed 2: acc 95.28  errors 23/487
+mcnn_pad_tr80_group: acc 96.61 ± 1.98  macro-F1 96.91 ± 1.79  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_pad_tr80_group.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 0.9490
+  seed 0 ep   5 loss 0.0311
+  seed 0 ep  10 loss 0.0062
+  seed 0 ep  15 loss 0.0370
+  seed 0 ep  20 loss 0.0025
+  seed 0 ep  25 loss 0.0023
+  seed 0 ep  30 loss 0.0019
+  seed 0: acc 97.03  errors 15/505
+  seed 1 ep   1 loss 0.9374
+  seed 1 ep   5 loss 0.0233
+  seed 1 ep  10 loss 0.0058
+  seed 1 ep  15 loss 0.0022
+  seed 1 ep  20 loss 0.0010
+  seed 1 ep  25 loss 0.0011
+  seed 1 ep  30 loss 0.0010
+  seed 1: acc 96.96  errors 15/494
+  seed 2 ep   1 loss 0.8358
+  seed 2 ep   5 loss 0.0123
+  seed 2 ep  10 loss 0.0026
+  seed 2 ep  15 loss 0.0014
+  seed 2 ep  20 loss 0.0010
+  seed 2 ep  25 loss 0.0010
+  seed 2 ep  30 loss 0.0008
+  seed 2: acc 94.25  errors 28/487
+varcnn_native_tr80_group: acc 96.08 ± 1.29  macro-F1 96.18 ± 1.94  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_native_tr80_group.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 1.3259
+  seed 0 ep   5 loss 0.2106
+  seed 0 ep  10 loss 0.0769
+  seed 0 ep  15 loss 0.0633
+  seed 0 ep  20 loss 0.0223
+  seed 0 ep  25 loss 0.0434
+  seed 0 ep  30 loss 0.0291
+  seed 0 ep  35 loss 0.0151
+  seed 0 ep  40 loss 0.0147
+  seed 0 ep  45 loss 0.0076
+  seed 0 ep  50 loss 0.0069
+  seed 0: acc 95.25  errors 24/505
+  seed 1 ep   1 loss 1.2561
+  seed 1 ep   5 loss 0.1763
+  seed 1 ep  10 loss 0.0523
+  seed 1 ep  15 loss 0.0296
+  seed 1 ep  20 loss 0.0171
+  seed 1 ep  25 loss 0.0127
+  seed 1 ep  30 loss 0.0063
+  seed 1 ep  35 loss 0.0055
+  seed 1 ep  40 loss 0.0037
+  seed 1 ep  45 loss 0.0039
+  seed 1 ep  50 loss 0.0026
+  seed 1: acc 97.37  errors 13/494
+  seed 2 ep   1 loss 1.2594
+  seed 2 ep   5 loss 0.1700
+  seed 2 ep  10 loss 0.0609
+  seed 2 ep  15 loss 0.0326
+  seed 2 ep  20 loss 0.0226
+  seed 2 ep  25 loss 0.0189
+  seed 2 ep  30 loss 0.0084
+  seed 2 ep  35 loss 0.0039
+  seed 2 ep  40 loss 0.0056
+  seed 2 ep  45 loss 0.0036
+  seed 2 ep  50 loss 0.0030
+  seed 2: acc 96.30  errors 18/487
+varcnn_randsize_tr80_group: acc 96.31 ± 0.87  macro-F1 95.58 ± 0.18  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_randsize_tr80_group.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 1.5805
+  seed 0 ep   5 loss 0.1277
+  seed 0 ep  10 loss 0.0997
+  seed 0 ep  15 loss 0.0187
+  seed 0 ep  20 loss 0.0167
+  seed 0 ep  25 loss 0.0128
+  seed 0 ep  30 loss 0.0163
+  seed 0 ep  35 loss 0.0026
+  seed 0 ep  40 loss 0.0026
+  seed 0 ep  45 loss 0.0021
+  seed 0 ep  50 loss 0.0022
+  seed 0: acc 94.65  errors 27/505
+  seed 1 ep   1 loss 1.6593
+  seed 1 ep   5 loss 0.1421
+  seed 1 ep  10 loss 0.0405
+  seed 1 ep  15 loss 0.0258
+  seed 1 ep  20 loss 0.0059
+  seed 1 ep  25 loss 0.0099
+  seed 1 ep  30 loss 0.0012
+  seed 1 ep  35 loss 0.0031
+  seed 1 ep  40 loss 0.0007
+  seed 1 ep  45 loss 0.0005
+  seed 1 ep  50 loss 0.0007
+  seed 1: acc 89.68  errors 51/494
+  seed 2 ep   1 loss 1.5892
+  seed 2 ep   5 loss 0.1519
+  seed 2 ep  10 loss 0.0516
+  seed 2 ep  15 loss 0.0204
+  seed 2 ep  20 loss 0.0262
+  seed 2 ep  25 loss 0.0160
+  seed 2 ep  30 loss 0.0054
+  seed 2 ep  35 loss 0.0010
+  seed 2 ep  40 loss 0.0012
+  seed 2 ep  45 loss 0.0021
+  seed 2 ep  50 loss 0.0029
+  seed 2: acc 89.94  errors 49/487
+mcnn_randsize-pad_tr80_group: acc 91.42 ± 2.29  macro-F1 89.00 ± 2.20  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_randsize-pad_tr80_group.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+  seed 0 ep   1 loss 1.7608
+  seed 0 ep   5 loss 0.6216
+  seed 0 ep  10 loss 0.2689
+  seed 0 ep  15 loss 0.1297
+  seed 0 ep  20 loss 0.0709
+  seed 0 ep  25 loss 0.0434
+  seed 0 ep  30 loss 0.0313
+  seed 0 ep  35 loss 0.0304
+  seed 0 ep  40 loss 0.0133
+  seed 0 ep  45 loss 0.0135
+  seed 0 ep  50 loss 0.0173
+  seed 0: acc 100.00  errors 0/235
+  seed 1 ep   1 loss 1.6870
+  seed 1 ep   5 loss 0.6109
+  seed 1 ep  10 loss 0.2902
+  seed 1 ep  15 loss 0.1177
+  seed 1 ep  20 loss 0.0698
+  seed 1 ep  25 loss 0.0547
+  seed 1 ep  30 loss 0.0378
+  seed 1 ep  35 loss 0.0299
+  seed 1 ep  40 loss 0.0214
+  seed 1 ep  45 loss 0.0170
+  seed 1 ep  50 loss 0.0220
+  seed 1: acc 100.00  errors 0/235
+  seed 2 ep   1 loss 1.7633
+  seed 2 ep   5 loss 0.5794
+  seed 2 ep  10 loss 0.2288
+  seed 2 ep  15 loss 0.1045
+  seed 2 ep  20 loss 0.0865
+  seed 2 ep  25 loss 0.0363
+  seed 2 ep  30 loss 0.0243
+  seed 2 ep  35 loss 0.0255
+  seed 2 ep  40 loss 0.0199
+  seed 2 ep  45 loss 0.0153
+  seed 2 ep  50 loss 0.0169
+  seed 2: acc 99.57  errors 1/235
+varcnn_randsize_tr80_dedup_t90: acc 99.86 ± 0.20  macro-F1 99.89 ± 0.15  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/varcnn_randsize_tr80_dedup_t90.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
+/home/server/Projeler/oguz/sonar_cnn/.venv/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1135.)
+  return F.conv2d(
+  seed 0 ep   1 loss 2.2396
+  seed 0 ep   5 loss 0.5623
+  seed 0 ep  10 loss 0.2704
+  seed 0 ep  15 loss 0.0901
+  seed 0 ep  20 loss 0.0786
+  seed 0 ep  25 loss 0.0243
+  seed 0 ep  30 loss 0.0195
+  seed 0 ep  35 loss 0.0125
+  seed 0 ep  40 loss 0.0097
+  seed 0 ep  45 loss 0.0100
+  seed 0 ep  50 loss 0.0098
+  seed 0: acc 99.15  errors 2/235
+  seed 1 ep   1 loss 2.2030
+  seed 1 ep   5 loss 0.5409
+  seed 1 ep  10 loss 0.2253
+  seed 1 ep  15 loss 0.0734
+  seed 1 ep  20 loss 0.0333
+  seed 1 ep  25 loss 0.0203
+  seed 1 ep  30 loss 0.0139
+  seed 1 ep  35 loss 0.0100
+  seed 1 ep  40 loss 0.0069
+  seed 1 ep  45 loss 0.0040
+  seed 1 ep  50 loss 0.0067
+  seed 1: acc 98.72  errors 3/235
+  seed 2 ep   1 loss 2.0647
+  seed 2 ep   5 loss 0.4377
+  seed 2 ep  10 loss 0.1299
+  seed 2 ep  15 loss 0.0520
+  seed 2 ep  20 loss 0.0765
+  seed 2 ep  25 loss 0.0184
+  seed 2 ep  30 loss 0.0122
+  seed 2 ep  35 loss 0.0072
+  seed 2 ep  40 loss 0.0077
+  seed 2 ep  45 loss 0.0036
+  seed 2 ep  50 loss 0.0044
+  seed 2: acc 97.45  errors 6/235
+mcnn_randsize-pad_tr80_dedup_t90: acc 98.44 ± 0.72  macro-F1 97.34 ± 1.25  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_randsize-pad_tr80_dedup_t90.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights

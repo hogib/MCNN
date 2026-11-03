@@ -36,18 +36,21 @@ correlation >= 0.85, kept on one side).
 
 ## Results
 Stratified 80/20, 3 seeds, AdamW lr 1e-3, cosine schedule, 30 epochs (50 for
-randsize), accuracy at the final epoch (no validation set).
+randsize), accuracy at the final epoch (no validation set). All runs regenerated
+on 2026-11-03 (RTX 5090); `results/*.json` carry per-class precision/recall/F1
+and confusion matrices, and `weights/` (untracked) holds one checkpoint per
+experiment and seed.
 
 | Model | Input | Random split | Group split | Dedup t=0.9, random split |
 |---|---|---|---|---|
 | Random forest on (h, w) | crop size only | 98.17 ± 0.70 | | |
-| MCNN | pad | 99.72 ± 0.26 (90/10: 99.86 ± 0.20) | 97.15 ± 1.45 | |
-| MCNN | silhouette (no content) | 98.31 ± 0.35 | | |
-| MCNN | randsize-pad | 99.44 ± 0.20 | 90.41 ± 2.29 | 98.44 ± 0.72 |
+| MCNN | pad | 99.79 ± 0.17 (90/10: 99.86 ± 0.20) | 96.61 ± 1.98 | |
+| MCNN | silhouette (no content) | 98.24 ± 0.55 | | |
+| MCNN | randsize-pad | 99.44 ± 0.53 | 91.42 ± 2.29 | 98.44 ± 0.72 |
 | MCNN | randsize-pad-constant | 19.03 (chance) | | |
-| VarCNN | native | 99.86 ± 0.10 | 95.75 ± 1.28 | |
-| VarCNN | native-constant (no content) | 97.04 ± 1.20 | | |
-| VarCNN | randsize | 99.86 ± 0.10 | 96.57 ± 0.36 | 99.72 ± 0.40 |
+| VarCNN | native | 99.86 ± 0.10 | 96.08 ± 1.29 | |
+| VarCNN | native-constant (no content) | 97.32 ± 0.95 | | |
+| VarCNN | randsize | 99.93 ± 0.10 | 96.31 ± 0.87 | 99.86 ± 0.20 |
 | VarCNN | randsize-constant | 19.03 (chance) | | |
 
 Near-duplicates (`results/dupes.json`): 1-NN on 32x32 thumbnails gets 100.00% on
