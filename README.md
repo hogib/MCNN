@@ -66,3 +66,40 @@ Takeaways:
 - Greedy dedup at 0.9 does not remove the leak (still ~99% on random splits):
   frames just under the threshold are still from the same stretch. Use the
   group split for honest numbers.
+
+## Scene-grouped evaluation on full frames (`sonar_cnn.scene`)
+
+Ported from [hogib/sonar_edge](https://github.com/hogib/sonar_edge), where these results were
+first produced. Instead of `watertank-cropped`, the crops are cut from the 1,868 full frames of
+`watertank-segmentation` (every annotated box of the ten debris classes, 2,826 crops, zero-padded
+to 305x305), so they can be assigned to the scene-grouped folds of the detector study. Add the
+frames to the sparse dataset clone with
+`git -C data/raw/marine-debris-fls-datasets sparse-checkout add md_fls_dataset/data/watertank-segmentation`
+(commit `4a77998`).
+
+- `splits/scene_folds_v1.json`: frames grouped into scenes reconstructed from the box layouts and
+  assigned to five folds (fold k test, fold k+1 validation, the rest training).
+- `splits/random_folds_v1.json`: the same frames assigned to five folds of the same sizes at
+  random (image level), for comparison; selected with `MCNN_SPLIT=splits/random_folds_v1.json`.
+- Models: MCNN (copy of the model used in the scene-fold runs; see `scene/mcnn_cv.py`),
+  MobileNetV3-Small and ShuffleNetV2 x0.5 from scratch with a one-channel first convolution, all
+  with MCNN's recipe (AdamW lr 1e-3, wd 1e-4, cosine, 30 epochs, batch 32, best validation epoch).
+
+```
+uv run python -m sonar_cnn.scene.classifiers train --arch mcnn --seeds 0 1 2      # also mnv3s, shufv2x05
+uv run python -m sonar_cnn.scene.classifiers summary --arch mnv3s                 # -> results/scene_cv/
+MCNN_SPLIT=splits/random_folds_v1.json uv run python -m sonar_cnn.scene.classifiers train --arch mcnn --prefix rcls
+uv run python -m sonar_cnn.scene.classifiers summary --arch mcnn --prefix rcls
+uv run python -m sonar_cnn.scene.material [--random]                               # microplastic sources vs other debris
+```
+
+Scene folds, pooled over the five test folds, mean ± sd over three seeds:
+
+| Model | Params | MACs/crop | Accuracy | Macro-F1 |
+|---|---|---|---|---|
+| MCNN | 2.80 M | 234.7 M | 77.7 ± 0.5 | 71.4 ± 1.7 |
+| MobileNetV3-Small | 1.53 M | 103.0 M | 71.9 ± 0.8 | 65.3 ± 1.8 |
+| ShuffleNetV2 x0.5 | 0.35 M | 68.1 M | 66.7 ± 2.1 | 58.3 ± 2.3 |
+
+(`summary --arch mcnn` with the default prefix reads the runs as `runs/mcnn_cv_s{seed}_f{k}`, the
+names they were produced under.)
