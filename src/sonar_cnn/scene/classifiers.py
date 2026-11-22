@@ -26,7 +26,7 @@ from .mcnn_cv import MCNN, PAD, ROOT, object_crops, pad, predict, scores
 from .macs import count_macs, count_params
 
 
-def make(arch, n_classes=10):
+def make(arch, n_classes=10, canvas=PAD):
     import torchvision
 
     if arch == "mnv3s":
@@ -42,9 +42,55 @@ def make(arch, n_classes=10):
     elif arch == "mcnn_t2":
         from ..models import MCNNTable2
         m = MCNNTable2(n_classes)
+    elif arch.startswith("mcnn_t2_"):  # ablation: mcnn_t2_bn, mcnn_t2_gap, mcnn_t2_bn_gap
+        from ..models import MCNNVariant
+        opts = set(arch[len("mcnn_t2_"):].split("_"))
+        assert opts <= {"bn", "gap"}, arch
+        m = MCNNVariant(n_classes, bn="bn" in opts, gap="gap" in opts, canvas=canvas)
     else:
         raise ValueError(arch)
     return m
+
+
+def augment(x, max_shift=16):
+    """Training augmentation on a padded batch (B, 1, H, W) in [0, 1]: horizontal flip (p=0.5),
+    shift of the object inside the canvas by up to max_shift pixels (limited to the empty margin, so
+    the object is never cut), gain x U(0.8, 1.25) and multiplicative speckle noise (sd 0.1)."""
+    B = x.shape[0]
+    flip = torch.rand(B, device=x.device) < 0.5
+    x = torch.where(flip[:, None, None, None], x.flip(-1), x)
+    out = torch.zeros_like(x)
+    for j in range(B):
+        nz = x[j, 0] > 0
+        rows, cols = nz.any(1).nonzero(), nz.any(0).nonzero()
+        if len(rows) == 0:
+            out[j] = x[j]
+            continue
+        r0, r1, c0, c1 = rows[0].item(), rows[-1].item(), cols[0].item(), cols[-1].item()
+        H, W = x.shape[-2:]
+        dy = int(torch.randint(-min(max_shift, r0), min(max_shift, H - 1 - r1) + 1, (1,)))
+        dx = int(torch.randint(-min(max_shift, c0), min(max_shift, W - 1 - c1) + 1, (1,)))
+        out[j] = torch.roll(x[j], (dy, dx), (-2, -1))
+    gain = torch.empty(B, 1, 1, 1, device=x.device).uniform_(0.8, 1.25)
+    out = out * gain * (1 + 0.1 * torch.randn_like(out))
+    return out.clamp_(0, 1)
+
+
+def pad_canvas(crops, canvas):
+    """Zero-pad each crop, centred, to canvas x canvas; crops larger than the canvas are shrunk
+    (aspect ratio kept) to fit. canvas=305 reproduces mcnn_cv.pad exactly."""
+    from PIL import Image
+
+    out = np.zeros((len(crops), 1, canvas, canvas), np.float32)
+    for i, c in enumerate(crops):
+        h, w = c.shape
+        if max(h, w) > canvas:
+            s = canvas / max(h, w)
+            h, w = max(1, round(h * s)), max(1, round(w * s))
+            c = np.asarray(Image.fromarray(c).resize((w, h), Image.BILINEAR))
+        t, l = (canvas - h) // 2, (canvas - w) // 2
+        out[i, 0, t : t + h, l : l + w] = c / 255.0
+    return torch.from_numpy(out)
 
 
 def train_fold(arch, X, y, folds, k, seed, args, device):
@@ -53,7 +99,7 @@ def train_fold(arch, X, y, folds, k, seed, args, device):
     v = (k + 1) % 5
     tr = np.where((folds != k) & (folds != v))[0]
     va, te = np.where(folds == v)[0], np.where(folds == k)[0]
-    model = make(arch, int(y.max()) + 1).to(device)
+    model = make(arch, int(y.max()) + 1, getattr(args, "canvas", PAD)).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
     steps = args.epochs * ((len(tr) + args.bs - 1) // args.bs)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
@@ -66,7 +112,10 @@ def train_fold(arch, X, y, folds, k, seed, args, device):
             if len(b) < 2:  # BatchNorm needs > 1 sample per batch in training mode
                 continue
             i = tr[b.numpy()]
-            loss = F.cross_entropy(model(X[i].to(device)), yt[i].to(device))
+            xb = X[i].to(device)
+            if getattr(args, "aug", False):
+                xb = augment(xb)
+            loss = F.cross_entropy(model(xb), yt[i].to(device))
             opt.zero_grad()
             loss.backward()
             opt.step()
@@ -86,7 +135,7 @@ def cmd_train(args):
     torch.set_num_threads(args.threads)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     crops, y, folds, ids, classes = object_crops()
-    X = pad(crops)
+    X = pad(crops) if args.canvas == PAD else pad_canvas(crops, args.canvas)
     print(f"{args.arch}: {len(crops)} crops, per fold {np.bincount(folds).tolist()}", flush=True)
     for seed in args.seeds:
         for k in range(5):
@@ -127,8 +176,8 @@ def cmd_summary(args):
     fmt = ("mcnn_cv_s{seed}_f{k}" if args.arch == "mcnn" and args.prefix == "cls"
            else args.prefix + "_{arch}_s{seed}_f{k}")
     s = summarize(args.arch, args.seeds, fmt)
-    m = make(args.arch)
-    s |= {"params": count_params(m), "macs_per_crop": count_macs(m, torch.zeros(1, 1, PAD, PAD))}
+    m = make(args.arch, canvas=args.canvas)
+    s |= {"params": count_params(m), "macs_per_crop": count_macs(m, torch.zeros(1, 1, args.canvas, args.canvas))}
     print(f"{args.arch}: acc {100 * s['acc_mean']:.2f} +- {100 * (s['acc_sd'] or 0):.2f}  macro-F1 "
           f"{100 * s['macro_f1_mean']:.2f} +- {100 * (s['macro_f1_sd'] or 0):.2f}  per fold "
           + " ".join(f"{100 * x:.1f}" for x in s["acc_per_fold_mean"])
@@ -150,19 +199,22 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(required=True)
     t = sub.add_parser("train")
-    t.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2"])
+    t.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2", "mcnn_t2_bn", "mcnn_t2_gap", "mcnn_t2_bn_gap"])
     t.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     t.add_argument("--epochs", type=int, default=30)
     t.add_argument("--bs", type=int, default=32)
     t.add_argument("--lr", type=float, default=1e-3)
     t.add_argument("--threads", type=int, default=4)
     t.add_argument("--force", action="store_true")
+    t.add_argument("--aug", action="store_true", help="training augmentation (see augment)")
+    t.add_argument("--canvas", type=int, default=PAD, help="padded input size (305 = MCNN)")
     t.add_argument("--prefix", default="cls", help="run-name prefix, e.g. rcls for the random split (MCNN_SPLIT)")
     t.set_defaults(func=cmd_train)
     s = sub.add_parser("summary")
-    s.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2"])
+    s.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2", "mcnn_t2_bn", "mcnn_t2_gap", "mcnn_t2_bn_gap"])
     s.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     s.add_argument("--prefix", default="cls")
+    s.add_argument("--canvas", type=int, default=PAD)
     s.set_defaults(func=cmd_summary)
     c = sub.add_parser("cost")
     c.set_defaults(func=cmd_cost)

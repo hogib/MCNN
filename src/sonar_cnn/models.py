@@ -83,6 +83,45 @@ class MCNNTable2(nn.Module):
         return self.head(self.features(x))
 
 
+
+class MCNNVariant(nn.Module):
+    """MCNNTable2 with optional changes, for the ablation (sonar_cnn.scene.classifiers):
+
+    bn:  BatchNorm after every convolution (MCNNTable2 has it after conv6 only);
+    gap: global average pooling over the last map, then FC-256 and FC-n, instead of flattening
+         the 9x9x128 map into FC-256 (which holds ~2.65 M of MCNN's 2.80 M parameters);
+    canvas: input size (305 as in MCNN; smaller canvases need gap=True or a matching FC size).
+    """
+
+    def __init__(self, n_classes=10, bn=False, gap=False, canvas=305):
+        super().__init__()
+
+        def conv(i, o, k, s=1, p=0, norm=bn):
+            return [nn.Conv2d(i, o, k, s, p)] + ([nn.BatchNorm2d(o)] if norm else []) + [nn.ReLU(inplace=True)]
+
+        self.features = nn.Sequential(
+            *conv(1, 32, 5, 2, 2),
+            *conv(32, 32, 5, 2, 2),
+            *conv(32, 32, 5, 2, 2),
+            nn.MaxPool2d(3, 2, 1),
+            *conv(32, 64, 3, 1, 1),
+            *conv(64, 64, 3, 1, 1),
+            nn.MaxPool2d(3, 2, 1),
+            *conv(64, 128, 2, norm=True),
+        )
+        if gap:
+            self.head = nn.Sequential(nn.AdaptiveAvgPool2d(1), nn.Flatten(), nn.Linear(128, 256),
+                                      nn.ReLU(inplace=True), nn.Linear(256, n_classes))
+        else:
+            with torch.no_grad():
+                n = self.features(torch.zeros(1, 1, canvas, canvas)).numel()
+            self.head = nn.Sequential(nn.Flatten(), nn.Linear(n, 256), nn.ReLU(inplace=True),
+                                      nn.Linear(256, n_classes))
+
+    def forward(self, x, sizes=None):
+        return self.head(self.features(x))
+
+
 def size_mask(sizes, H, W):
     """(B,1,H,W) float mask, 1 inside each sample's real (h, w) top-left region."""
     rows = torch.arange(H, device=sizes.device)[None, :, None] < sizes[:, 0, None, None]
