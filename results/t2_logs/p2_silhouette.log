@@ -1,0 +1,26 @@
+  seed 0 ep   1 loss 0.9746
+  seed 0 ep   5 loss 0.1632
+  seed 0 ep  10 loss 0.0421
+  seed 0 ep  15 loss 0.0220
+  seed 0 ep  20 loss 0.0212
+  seed 0 ep  25 loss 0.0203
+  seed 0 ep  30 loss 0.0200
+  seed 0: acc 97.46  errors 12/473
+  seed 1 ep   1 loss 0.9711
+  seed 1 ep   5 loss 0.0639
+  seed 1 ep  10 loss 0.0380
+  seed 1 ep  15 loss 0.0244
+  seed 1 ep  20 loss 0.0239
+  seed 1 ep  25 loss 0.0229
+  seed 1 ep  30 loss 0.0221
+  seed 1: acc 99.15  errors 4/473
+  seed 2 ep   1 loss 1.0976
+  seed 2 ep   5 loss 0.1410
+  seed 2 ep  10 loss 0.0326
+  seed 2 ep  15 loss 0.0249
+  seed 2 ep  20 loss 0.0223
+  seed 2 ep  25 loss 0.0207
+  seed 2 ep  30 loss 0.0199
+  seed 2: acc 98.31  errors 8/473
+mcnn_t2_silhouette_tr80: acc 98.31 ± 0.69  macro-F1 98.49 ± 0.61  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_t2_silhouette_tr80.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights

@@ -1,0 +1,26 @@
+  seed 0 ep   1 loss 0.7061
+  seed 0 ep   5 loss 0.0151
+  seed 0 ep  10 loss 0.0001
+  seed 0 ep  15 loss 0.0001
+  seed 0 ep  20 loss 0.0000
+  seed 0 ep  25 loss 0.0000
+  seed 0 ep  30 loss 0.0000
+  seed 0: acc 99.16  errors 2/237
+  seed 1 ep   1 loss 0.6736
+  seed 1 ep   5 loss 0.0131
+  seed 1 ep  10 loss 0.0001
+  seed 1 ep  15 loss 0.0001
+  seed 1 ep  20 loss 0.0001
+  seed 1 ep  25 loss 0.0000
+  seed 1 ep  30 loss 0.0000
+  seed 1: acc 100.00  errors 0/237
+  seed 2 ep   1 loss 0.5557
+  seed 2 ep   5 loss 0.0005
+  seed 2 ep  10 loss 0.0001
+  seed 2 ep  15 loss 0.0001
+  seed 2 ep  20 loss 0.0001
+  seed 2 ep  25 loss 0.0000
+  seed 2 ep  30 loss 0.0000
+  seed 2: acc 100.00  errors 0/237
+mcnn_t2_pad_tr90: acc 99.72 ± 0.40  macro-F1 99.81 ± 0.26  (3 seeds)
+wrote /home/server/Projeler/oguz/sonar_cnn/results/mcnn_t2_pad_tr90.json and 3 weight files to /home/server/Projeler/oguz/sonar_cnn/weights
