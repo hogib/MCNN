@@ -90,14 +90,15 @@ uv run python -m sonar_cnn.scene.classifiers train --arch mcnn --seeds 0 1 2    
 uv run python -m sonar_cnn.scene.classifiers summary --arch mnv3s                 # -> results/scene_cv/
 MCNN_SPLIT=splits/random_folds_v1.json uv run python -m sonar_cnn.scene.classifiers train --arch mcnn --prefix rcls
 uv run python -m sonar_cnn.scene.classifiers summary --arch mcnn --prefix rcls
-uv run python -m sonar_cnn.scene.material [--random]                               # microplastic sources vs other debris
+uv run python -m sonar_cnn.scene.material [--random] [--mcnn mcnn]                 # microplastic sources vs other debris (default MCNN runs: mcnn_t2)
 ```
 
 Scene folds, pooled over the five test folds, mean ± sd over three seeds:
 
 | Model | Params | MACs/crop | Accuracy | Macro-F1 |
 |---|---|---|---|---|
-| MCNN | 2.80 M | 234.7 M | 77.7 ± 0.5 | 71.4 ± 1.7 |
+| MCNN, design-table pooling (`mcnn_t2`, used in the paper) | 2.80 M | 236.9 M | 76.2 ± 2.0 | 69.6 ± 3.3 |
+| MCNN, 2x2 pooling (`mcnn`) | 2.80 M | 234.7 M | 77.7 ± 0.5 | 71.4 ± 1.7 |
 | MobileNetV3-Small | 1.53 M | 103.0 M | 71.9 ± 0.8 | 65.3 ± 1.8 |
 | ShuffleNetV2 x0.5 | 0.35 M | 68.1 M | 66.7 ± 2.1 | 58.3 ± 2.3 |
 
@@ -106,12 +107,13 @@ test frames of each fold share their scene with training frames):
 
 | Model | Accuracy | Macro-F1 | Scene folds → random: accuracy gain |
 |---|---|---|---|
-| MCNN | 95.9 ± 0.2 | 95.3 ± 0.2 | +18.2 |
+| MCNN (`mcnn_t2`) | 95.9 ± 0.0 | 95.4 ± 0.2 | +19.7 |
+| MCNN (`mcnn`) | 95.9 ± 0.2 | 95.3 ± 0.2 | +18.2 |
 | MobileNetV3-Small | 93.7 ± 0.8 | 92.7 ± 1.0 | +21.8 |
 | ShuffleNetV2 x0.5 | 88.7 ± 1.4 | 86.2 ± 1.5 | +22.0 |
 
 Microplastic sources vs other debris, F1 of the microplastic group: MCNN 87.4 (scene) / 98.3
-(random), MobileNetV3-Small 81.6 / 96.8, ShuffleNetV2 x0.5 75.5 / 92.9.
+(random) for `mcnn`, 86.5 / 98.2 for `mcnn_t2`, MobileNetV3-Small 81.6 / 96.8, ShuffleNetV2 x0.5 75.5 / 92.9.
 
 (`summary --arch mcnn` with the default prefix reads the runs as `runs/mcnn_cv_s{seed}_f{k}`, the
 names they were produced under.)

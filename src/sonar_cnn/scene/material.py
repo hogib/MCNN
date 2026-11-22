@@ -9,6 +9,8 @@ ten-class scores.
 
   uv run python -m sonar_cnn.scene.material                     # scene folds  -> results/scene_cv/cls_material_summary.json
   uv run python -m sonar_cnn.scene.material --random            # random split -> results/scene_cv/rcls_material_summary.json
+MCNN runs: --mcnn mcnn_t2 (default; design-table pooling, runs cls_mcnn_t2_* / rcls_mcnn_t2_*)
+or --mcnn mcnn (2x2-pooling variant, runs mcnn_cv_* / rcls_mcnn_*).
 """
 import argparse
 import json
@@ -51,8 +53,14 @@ def runs(prefix, seed):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--random", action="store_true", help="score the random-split runs (rcls_*)")
+    ap.add_argument("--mcnn", choices=["mcnn_t2", "mcnn"], default="mcnn_t2", help="which MCNN runs to score")
     args = ap.parse_args()
-    prefixes = ("rcls_mcnn", "rcls_mnv3s", "rcls_shufv2x05") if args.random else ("mcnn_cv", "cls_mnv3s", "cls_shufv2x05")
+    if args.random:
+        m = f"rcls_{args.mcnn}"
+        prefixes = (m, "rcls_mnv3s", "rcls_shufv2x05")
+    else:
+        m = "cls_mcnn_t2" if args.mcnn == "mcnn_t2" else "mcnn_cv"
+        prefixes = (m, "cls_mnv3s", "cls_shufv2x05")
     out = {}
     for pre in prefixes:
         rows = [runs(pre, s) for s in range(3)]
