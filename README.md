@@ -101,5 +101,17 @@ Scene folds, pooled over the five test folds, mean ± sd over three seeds:
 | MobileNetV3-Small | 1.53 M | 103.0 M | 71.9 ± 0.8 | 65.3 ± 1.8 |
 | ShuffleNetV2 x0.5 | 0.35 M | 68.1 M | 66.7 ± 2.1 | 58.3 ± 2.3 |
 
+Random image-level folds of the same sizes (same frames, recipe and evaluator; 90-96% of the
+test frames of each fold share their scene with training frames):
+
+| Model | Accuracy | Macro-F1 | Scene folds → random: accuracy gain |
+|---|---|---|---|
+| MCNN | 95.9 ± 0.2 | 95.3 ± 0.2 | +18.2 |
+| MobileNetV3-Small | 93.7 ± 0.8 | 92.7 ± 1.0 | +21.8 |
+| ShuffleNetV2 x0.5 | 88.7 ± 1.4 | 86.2 ± 1.5 | +22.0 |
+
+Microplastic sources vs other debris, F1 of the microplastic group: MCNN 87.4 (scene) / 98.3
+(random), MobileNetV3-Small 81.6 / 96.8, ShuffleNetV2 x0.5 75.5 / 92.9.
+
 (`summary --arch mcnn` with the default prefix reads the runs as `runs/mcnn_cv_s{seed}_f{k}`, the
 names they were produced under.)
