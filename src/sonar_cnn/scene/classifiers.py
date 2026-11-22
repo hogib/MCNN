@@ -39,6 +39,9 @@ def make(arch, n_classes=10):
         m.conv1[0] = nn.Conv2d(1, c.out_channels, c.kernel_size, c.stride, c.padding, bias=False)
     elif arch == "mcnn":
         m = MCNN(n_classes)
+    elif arch == "mcnn_t2":
+        from ..models import MCNNTable2
+        m = MCNNTable2(n_classes)
     else:
         raise ValueError(arch)
     return m
@@ -147,7 +150,7 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(required=True)
     t = sub.add_parser("train")
-    t.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn"])
+    t.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2"])
     t.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     t.add_argument("--epochs", type=int, default=30)
     t.add_argument("--bs", type=int, default=32)
@@ -157,7 +160,7 @@ def main():
     t.add_argument("--prefix", default="cls", help="run-name prefix, e.g. rcls for the random split (MCNN_SPLIT)")
     t.set_defaults(func=cmd_train)
     s = sub.add_parser("summary")
-    s.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn"])
+    s.add_argument("--arch", required=True, choices=["mnv3s", "shufv2x05", "mcnn", "mcnn_t2"])
     s.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     s.add_argument("--prefix", default="cls")
     s.set_defaults(func=cmd_summary)

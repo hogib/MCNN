@@ -42,6 +42,47 @@ class MCNN(nn.Module):
         return self.head(self.features(x))
 
 
+
+class MCNNTable2(nn.Module):
+    """MCNN with the pooling of the design table (Table 2 of the MCNN paper draft).
+
+    Differences from MCNN above: both max pools are 3x3 with stride 2 (padding 1), giving the
+    table's 20x20 and 10x10 maps, and conv6 (2x2) has no padding, giving 10 -> 9. conv1-3 use
+    padding 2: the table lists padding 1 for conv2-3 but output sizes 77 and 39, which need
+    padding 2. A ReLU follows every convolution, as in MCNN above (the table lists one ReLU,
+    after conv6). Output sizes: 305 -> 153 -> 77 -> 39 -> 20 -> 20 -> 20 -> 10 -> 9;
+    same parameter count as MCNN (2,797,706).
+    """
+
+    def __init__(self, n_classes=10):
+        super().__init__()
+
+        def conv(i, o, k, s=1, p=0):
+            return [nn.Conv2d(i, o, k, s, p), nn.ReLU(inplace=True)]
+
+        self.features = nn.Sequential(
+            *conv(1, 32, 5, 2, 2),
+            *conv(32, 32, 5, 2, 2),
+            *conv(32, 32, 5, 2, 2),
+            nn.MaxPool2d(3, 2, 1),
+            *conv(32, 64, 3, 1, 1),
+            *conv(64, 64, 3, 1, 1),
+            nn.MaxPool2d(3, 2, 1),
+            nn.Conv2d(64, 128, 2),
+            nn.BatchNorm2d(128),
+            nn.ReLU(inplace=True),
+        )
+        self.head = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(9 * 9 * 128, 256),
+            nn.ReLU(inplace=True),
+            nn.Linear(256, n_classes),
+        )
+
+    def forward(self, x, sizes=None):
+        return self.head(self.features(x))
+
+
 def size_mask(sizes, H, W):
     """(B,1,H,W) float mask, 1 inside each sample's real (h, w) top-left region."""
     rows = torch.arange(H, device=sizes.device)[None, :, None] < sizes[:, 0, None, None]
@@ -127,4 +168,4 @@ class VarCNN(nn.Module):
         return self.head(torch.cat([mean, mx], 1))
 
 
-MODELS = {"mcnn": MCNN, "varcnn": VarCNN}
+MODELS = {"mcnn": MCNN, "mcnn_t2": MCNNTable2, "varcnn": VarCNN}
