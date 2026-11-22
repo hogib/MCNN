@@ -115,3 +115,11 @@ Microplastic sources vs other debris, F1 of the microplastic group: MCNN 87.4 (s
 
 (`summary --arch mcnn` with the default prefix reads the runs as `runs/mcnn_cv_s{seed}_f{k}`, the
 names they were produced under.)
+
+## License
+
+The code is released under the MIT License (see `LICENSE`). The sonar images are not included;
+they belong to the Marine Debris FLS datasets
+(<https://github.com/mvaldenegro/marine-debris-fls-datasets>, doi:10.5281/zenodo.15101686),
+distributed under CC BY-NC-SA 4.0. The fold files in `splits/` list frame identifiers of that
+dataset; cite the dataset when using them.
